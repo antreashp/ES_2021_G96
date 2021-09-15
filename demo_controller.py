@@ -4,6 +4,9 @@
 # note that the param 'controller' received by 'control' is provided through environment.play(pcont=x)
 # 'controller' could contain either weights to be used in the standard controller (or other controller implemented),
 # or even a full network structure (ex.: from NEAT).
+
+import sys
+sys.path.insert(0, 'evoman')
 from controller import Controller
 import numpy as np
 
