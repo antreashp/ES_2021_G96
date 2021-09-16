@@ -68,9 +68,10 @@ def run(config_file):
     #     print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
 
     # node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
-    visualize.draw_net(config, winner, True, node_names=None)
-    visualize.plot_stats(stats, ylog=False, view=True)
-    visualize.plot_species(stats, view=True)
+    img_path = os.path.join(experiment_name, 'img')
+    visualize.draw_net(config, winner, True, filename=os.path.join(img_path, 'winning_genome.svg'))
+    visualize.plot_stats(stats, ylog=False, view=True, filename=os.path.join(img_path, 'plot_stats.svg'))
+    visualize.plot_species(stats, view=True, filename=os.path.join(img_path, 'plot_species.svg'))
 
     # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
     # p.run(eval_genomes, 10)
