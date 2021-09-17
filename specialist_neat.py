@@ -10,9 +10,9 @@ os.environ["PATH"] += os.pathsep + 'C:\\Program Files\\Graphviz\\bin\\'
 import sys
 sys.path.insert(0, 'evoman')
 from environment import Environment
-
+from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
-experiment_name = 'meh'
+experiment_name = 'test'
 
 headless = True
 if headless:
@@ -31,7 +31,7 @@ env = Environment(experiment_name=experiment_name,
 
 
 def eval_genomes(genomes, config):
-    for genome_id, genome in genomes:
+    for genome_id, genome in tqdm(genomes):
         # genome.fitness = 4.0
         env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config))
 
@@ -57,7 +57,7 @@ def run(config_file):
     p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 300 generations.
-    winner = p.run(eval_genomes,1)
+    winner = p.run(eval_genomes,20)
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
