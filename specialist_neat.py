@@ -4,7 +4,7 @@ import os
 import neat
 import visualize
 # imports framework
-import os
+import os,sys
 os.environ["PATH"] += os.pathsep + 'C:\\Program Files\\Graphviz\\bin\\'
 
 import sys
@@ -12,7 +12,9 @@ sys.path.insert(0, 'evoman')
 from environment import Environment
 from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
-experiment_name = 'test'
+
+enemy = str(sys.argv[1])
+experiment_name = 'enemy'+ str(enemy)
 
 headless = True
 if headless:
@@ -22,22 +24,28 @@ if headless:
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 env = Environment(experiment_name=experiment_name,
-                  enemies=[2],
+                  enemies=[enemy],
                   playermode="ai",
                   player_controller=player_controller,
                   enemymode="static",
                   level=2,
                   speed="fastest")
 
+def evaluate(genome,config):
+    env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config))
+
+    f,p,e,t = env.play(pcont=genome)
+    genome.fitness = f
 
 def eval_genomes(genomes, config):
     for genome_id, genome in tqdm(genomes):
         # genome.fitness = 4.0
+        # print(f,p,e,t)
         env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config))
 
         f,p,e,t = env.play(pcont=genome)
         genome.fitness = f
-        # print(f,p,e,t)
+    
     # return f
 
 
@@ -57,7 +65,7 @@ def run(config_file):
     p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 300 generations.
-    winner = p.run(eval_genomes,20)
+    winner = p.run(eval_genomes,50)
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
