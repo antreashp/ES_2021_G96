@@ -3,8 +3,10 @@ from __future__ import print_function
 import os
 import neat
 import visualize
-
 # imports framework
+import os
+os.environ["PATH"] += os.pathsep + 'C:\\Program Files\\Graphviz\\bin\\'
+
 import sys
 sys.path.insert(0, 'evoman')
 from environment import Environment
@@ -68,10 +70,9 @@ def run(config_file):
     #     print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
 
     # node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
-    img_path = os.path.join(experiment_name, 'img')
-    visualize.draw_net(config, winner, True, filename=os.path.join(img_path, 'winning_genome.svg'))
-    visualize.plot_stats(stats, ylog=False, view=True, filename=os.path.join(img_path, 'plot_stats.svg'))
-    visualize.plot_species(stats, view=True, filename=os.path.join(img_path, 'plot_species.svg'))
+    visualize.draw_net(config, winner, True, node_names=None)
+    visualize.plot_stats(stats, ylog=False, view=True)
+    visualize.plot_species(stats, view=True)
 
     # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
     # p.run(eval_genomes, 10)
