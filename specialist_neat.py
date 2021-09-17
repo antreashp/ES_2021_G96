@@ -13,7 +13,7 @@ from environment import Environment
 from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
 
-enemy = str(sys.argv[1])
+enemy = str(sys.argv[1]) if len(sys.argv[1])> 1 else 6 
 experiment_name = 'enemy'+ str(enemy)
 
 headless = True
@@ -65,7 +65,7 @@ def run(config_file):
     p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 300 generations.
-    winner = p.run(eval_genomes,50)
+    winner = p.run(eval_genomes,int(sys.argv[2]) if len(sys.argv)>2 else 50 )
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
