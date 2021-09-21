@@ -6,14 +6,14 @@ import visualize
 # imports framework
 import os,sys
 os.environ["PATH"] += os.pathsep + 'C:\\Program Files\\Graphviz\\bin\\'
-
+import pickle
 import sys
 sys.path.insert(0, 'evoman')
 from environment import Environment
 from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
 
-enemy = str(sys.argv[1]) if len(sys.argv[1])> 1 else 6 
+enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
 experiment_name = 'enemy'+ str(enemy)
 
 headless = True
@@ -62,7 +62,7 @@ def run(config_file):
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
+    p.add_reporter(neat.Checkpointer(5,filename_prefix='enemy'+str(enemy) + str('/')))
 
     # Run for up to 300 generations.
     winner = p.run(eval_genomes,int(sys.argv[2]) if len(sys.argv)>2 else 50 )
@@ -76,7 +76,10 @@ def run(config_file):
     # for xi, xo in zip(xor_inputs, xor_outputs):
     #     output = winner_net.activate(xi)
     #     print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
+    with open('enemy'+str(enemy) + str('/')+'winner_genome.pkl','wb')as f:
 
+        pickle.dump(winner,f)
+        f.close()
     # node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
     visualize.draw_net(config, winner, True, node_names=None)
     visualize.plot_stats(stats, ylog=False, view=True)
