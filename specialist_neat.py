@@ -57,7 +57,7 @@ def run(config_file):
 
     # Create the population, which is the top-level object for a NEAT run.
     p = neat.Population(config)
-
+    
     # Add a stdout reporter to show progress in the terminal.
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
@@ -81,9 +81,9 @@ def run(config_file):
         pickle.dump(winner,f)
         f.close()
     # node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
-    visualize.draw_net(config, winner, True, node_names=None)
-    visualize.plot_stats(stats, ylog=False, view=True)
-    visualize.plot_species(stats, view=True)
+    visualize.draw_net(config, winner, True, node_names=None,filename='enemy'+str(enemy) + str('/')+'model_graph.svg')
+    visualize.plot_stats(stats, ylog=False, view=True,filename='enemy'+str(enemy) + str('/')+'avg_fitness.svg')
+    visualize.plot_species(stats, view=True,filename='enemy'+str(enemy) + str('/')+'species.svg')
 
     # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
     # p.run(eval_genomes, 10)
