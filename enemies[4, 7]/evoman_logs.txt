@@ -1,0 +1,165 @@
+
+
+MESSAGE: Pygame initialized for simulation.
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 2.947910831075583; player life: 0; enemy life: 90.0; time: 425
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 2.8929771122577455; player life: 0; enemy life: 90.0; time: 449
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.236441962829949; player life: 0; enemy life: 100; time: 188
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.676753802268282; player life: 0; enemy life: 100; time: 292
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.356586274672012; player life: 0; enemy life: 100; time: 212
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 21.747726571953372; player life: 0; enemy life: 70.0; time: 191
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 3.0467566657122154; player life: 0; enemy life: 90.0; time: 385
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.3981627015177525; player life: 0; enemy life: 100; time: 221
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.983606621708336; player life: 0; enemy life: 100; time: 146
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -6.8966943316227125; player life: 0; enemy life: 100; time: 989
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 21.24109822612272; player life: 0; enemy life: 70.0; time: 317
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 3.1710543823897925; player life: 0; enemy life: 90.0; time: 340
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 12.439318368984473; player life: 0; enemy life: 80.0; time: 260
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.351858133476067; player life: 0; enemy life: 100; time: 211
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 12.394197933704003; player life: 0; enemy life: 80.0; time: 272
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.424950017481403; player life: 0; enemy life: 100; time: 227
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.983606621708336; player life: 0; enemy life: 100; time: 146
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -6.091309882077698; player life: 0; enemy life: 100; time: 442
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.231108616854587; player life: 0; enemy life: 100; time: 187
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.455321115357702; player life: 0; enemy life: 100; time: 234
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 12.383228902333428; player life: 0; enemy life: 80.0; time: 275
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.3706380281276624; player life: 0; enemy life: 100; time: 215
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.990432586778736; player life: 0; enemy life: 100; time: 147
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 3.194865031083512; player life: 0; enemy life: 90.0; time: 332
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.3706380281276624; player life: 0; enemy life: 100; time: 215
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.990432586778736; player life: 0; enemy life: 100; time: 147
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.117993812416755; player life: 0; enemy life: 100; time: 167
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.0689042022202315; player life: 0; enemy life: 100; time: 159
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.990432586778736; player life: 0; enemy life: 100; time: 147
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.983606621708336; player life: 0; enemy life: 100; time: 146
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.3706380281276624; player life: 0; enemy life: 100; time: 215
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 21.67212383121042; player life: 0; enemy life: 70.0; time: 206
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.990432586778736; player life: 0; enemy life: 100; time: 147
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 21.747726571953372; player life: 0; enemy life: 70.0; time: 191
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -5.4680601411351315; player life: 0; enemy life: 100; time: 237
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.990432586778736; player life: 0; enemy life: 100; time: 147
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: -4.990432586778736; player life: 0; enemy life: 100; time: 147
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 2.127871898661014; player life: 0; enemy life: 90.0; time: 965
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 2.7290115681417006; player life: 0; enemy life: 90.0; time: 529
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.
+
+RUN: run status: enemy: 4; fitness: 3.6293619718723376; player life: 0; enemy life: 90.0; time: 215
+
+MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.

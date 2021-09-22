@@ -1,6 +1,5 @@
 import neat
 import os,sys
-os.environ["PATH"] += os.pathsep + 'C:\\Program Files\\Graphviz\\bin\\'
 import pickle
 import sys
 sys.path.insert(0, 'evoman')
@@ -55,6 +54,11 @@ if __name__ == '__main__':
     # current working directory.
     # local_dir = os.path.dirname(__file__)
     # config_path = os.path.join(local_dir, 'config-feedforward.txt')
-    # run(config_path)
-    f = test(winner)
-    print(f)
+    fitnesses =[]
+    for i in range(10):
+        fitnesses.append( test(winner))
+    
+
+    
+
+
