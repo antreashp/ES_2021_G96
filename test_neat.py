@@ -37,14 +37,14 @@ config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
 def test(genome):
     
 
-    env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config))
+    env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config),write=True)
 
     f,p,e,t = env.play(pcont=genome)
     genome.fitness = f
     return f
 
 if __name__ == '__main__':
-    with open('enemy7/winner_genome.pkl', 'rb') as f:
+    with open('enemy6/winner_genome.pkl', 'rb') as f:
         winner = pickle.load(f)
 
     print('Loaded genome:')
