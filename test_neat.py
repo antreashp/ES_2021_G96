@@ -14,10 +14,11 @@ if headless:
 
 enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
 # load the winner
-experiment_name = 'enemy'+ str(enemy)
-
+experiment_name = 'test_enemy'+ str(enemy)
+if not os.path.exists(experiment_name):
+    os.makedirs(experiment_name)
 env = Environment(experiment_name=experiment_name,
-                  enemies=[enemy],
+                  enemies=[int(enemy)],
                   playermode="ai",
                   player_controller=player_controller,
                   enemymode="static",
@@ -35,7 +36,7 @@ config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                      config_path)
 
 def test(genome):
-    
+    print('hello')
 
     env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config),write=True)
 
@@ -44,16 +45,14 @@ def test(genome):
     return f
 
 if __name__ == '__main__':
-    with open('enemy6/winner_genome.pkl', 'rb') as f:
+    print('meh')
+    with open('enemy'+str(enemy)+'/winner_genome.pkl', 'rb') as f:
         winner = pickle.load(f)
 
     print('Loaded genome:')
-    # print(winner)
-    # Determine path to configuration file. This path manipulation is
-    # here so that the script will run successfully regardless of the
-    # current working directory.
-    # local_dir = os.path.dirname(__file__)
-    # config_path = os.path.join(local_dir, 'config-feedforward.txt')
+    
+    
+
     fitnesses =[]
     for i in range(10):
         fitnesses.append( test(winner))

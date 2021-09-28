@@ -3,8 +3,6 @@ from __future__ import print_function
 import os
 import neat
 import visualize
-import statistics
-import numpy as np
 # imports framework
 import os,sys
 os.environ["PATH"] += os.pathsep + 'C:\\Program Files\\Graphviz\\bin\\'
@@ -15,22 +13,8 @@ from environment import Environment
 from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
 
-enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
-experiment_name = 'enemy'+ str(enemy)+'test'
-headless = True
-if headless:
-    os.environ["SDL_VIDEODRIVER"] = "dummy"
-
-
-if not os.path.exists(experiment_name):
-    os.makedirs(experiment_name)
-env = Environment(experiment_name=experiment_name,
-                  enemies=[enemy],
-                  playermode="ai",
-                  player_controller=player_controller,
-                  enemymode="static",
-                  level=2,
-                  speed="fastest")
+import statistics
+import numpy as np
 
 
 def eval_genomes(genomes, config):
@@ -90,9 +74,9 @@ def run(config_file):
         pickle.dump(winner,f)
         f.close()
     # node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
-    visualize.draw_net(config, winner, True, node_names=None,filename='enemy'+str(enemy) + str('/')+'model_graph.svg')
-    visualize.plot_stats(stats, ylog=False, view=True,filename='enemy'+str(enemy) + str('/')+'avg_fitness.svg')
-    visualize.plot_species(stats, view=True,filename='enemy'+str(enemy) + str('/')+'species.svg')
+    # visualize.draw_net(config, winner, True, node_names=None,filename='enemy'+str(enemy) + str('/')+'model_graph.svg')
+    # visualize.plot_stats(stats, ylog=False, view=True,filename='enemy'+str(enemy) + str('/')+'avg_fitness.svg')
+    # visualize.plot_species(stats, view=True,filename='enemy'+str(enemy) + str('/')+'species.svg')
 
     # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
     # p.run(eval_genomes, 10)
@@ -102,8 +86,29 @@ if __name__ == '__main__':
     # Determine path to configuration file. This path manipulation is
     # here so that the script will run successfully regardless of the
     # current working directory.
-    if  os.path.exists(experiment_name+'/'+'my_log.txt'):
-        os.remove(experiment_name+'/'+'my_log.txt')
-    local_dir = os.path.dirname(__file__)
-    config_path = os.path.join(local_dir, 'config-feedforward.txt')
-    run(config_path)
+    enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
+        
+    for i in range(10):
+            
+        experiment_name = 'enemy'+ str(enemy)+'test_'+str(i)
+        headless = True
+        if headless:
+            os.environ["SDL_VIDEODRIVER"] = "dummy"
+
+
+        if not os.path.exists(experiment_name):
+            os.makedirs(experiment_name)
+        env = Environment(experiment_name=experiment_name,
+                        enemies=[enemy],
+                        playermode="ai",
+                        player_controller=player_controller,
+                        enemymode="static",
+                        level=2,
+                        speed="fastest")
+
+
+        if  os.path.exists(experiment_name+'/'+'my_log.txt'):
+            os.remove(experiment_name+'/'+'my_log.txt')
+        local_dir = os.path.dirname(__file__)
+        config_path = os.path.join(local_dir, 'config-feedforward.txt')
+        run(config_path)
