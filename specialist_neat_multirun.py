@@ -69,7 +69,7 @@ def run(config_file):
     # for xi, xo in zip(xor_inputs, xor_outputs):
     #     output = winner_net.activate(xi)
     #     print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
-    with open('enemy'+str(enemy) + str('/')+'winner_genome.pkl','wb')as f:
+    with open(experiment_name+'/'+'winner_genome.pkl','wb')as f:
 
         pickle.dump(winner,f)
         f.close()
@@ -90,7 +90,7 @@ if __name__ == '__main__':
         
     for i in range(10):
             
-        experiment_name = 'enemy'+ str(enemy)+'test_'+str(i)
+        experiment_name = 'enemy'+ str(enemy)+'randomini_test_'+str(i)
         headless = True
         if headless:
             os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -104,7 +104,8 @@ if __name__ == '__main__':
                         player_controller=player_controller,
                         enemymode="static",
                         level=2,
-                        speed="fastest")
+                        speed="fastest",
+                        randomini="yes" )
 
 
         if  os.path.exists(experiment_name+'/'+'my_log.txt'):
