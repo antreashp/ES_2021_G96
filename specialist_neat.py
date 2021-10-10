@@ -15,8 +15,8 @@ from environment import Environment
 from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
 
-enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
-experiment_name = 'enemy'+ str(enemy)+'test'
+enemy = str(sys.argv[1]) 
+experiment_name = 'neat_enemy_again'+ str(enemy)
 headless = True
 if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -30,6 +30,7 @@ env = Environment(experiment_name=experiment_name,
                   player_controller=player_controller,
                   enemymode="static",
                   level=2,
+                   randomini="yes" ,
                   speed="fastest")
 
 
@@ -37,6 +38,9 @@ def eval_genomes(genomes, config):
     sum = 0
     max = -9999999
     c = 0
+    
+    global max_f
+    global max_g
     fs  = []
     for genome_id, genome in tqdm(genomes):
         # genome.fitness = 4.0
@@ -50,7 +54,9 @@ def eval_genomes(genomes, config):
         sum += f
         if f>max:
             max = f
-
+        if f > max_f:
+            max_f = f
+            max_g = genome
     mean = np.sum(fs)  / c
     std = statistics.stdev(fs)
     with open(experiment_name+'/'+'my_log.txt','a') as f:
@@ -85,9 +91,13 @@ def run(config_file):
     # for xi, xo in zip(xor_inputs, xor_outputs):
     #     output = winner_net.activate(xi)
     #     print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
-    with open('enemy'+str(enemy) + str('/')+'winner_genome.pkl','wb')as f:
+    with open(experiment_name+'/winner_genome.pkl','wb')as f:
 
         pickle.dump(winner,f)
+        f.close()
+    with open(experiment_name+'/my_winner_genome_'+str(int(max_f))+'.pkl','wb')as f:
+
+        pickle.dump(max_g,f)
         f.close()
     # node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
     visualize.draw_net(config, winner, True, node_names=None,filename='enemy'+str(enemy) + str('/')+'model_graph.svg')
@@ -99,11 +109,17 @@ def run(config_file):
 
 
 if __name__ == '__main__':
+    global max_f 
+    max_f = -9999
+    global max_g 
+    max_g = None
     # Determine path to configuration file. This path manipulation is
     # here so that the script will run successfully regardless of the
     # current working directory.
+    
     if  os.path.exists(experiment_name+'/'+'my_log.txt'):
         os.remove(experiment_name+'/'+'my_log.txt')
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-feedforward.txt')
     run(config_path)
+    

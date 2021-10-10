@@ -18,11 +18,13 @@ from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
 enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
 
-
 def eval_fitness(genomes, config):
     sum = 0
     max = -9999999
     c = 0
+    global max_f
+    global max_g
+    
     fs  = []
     for idx, genome in tqdm(genomes):
         
@@ -40,6 +42,10 @@ def eval_fitness(genomes, config):
         env.player_controller =player_controller(  net)
         c +=1
         f,p,e,t = env.play(pcont=genome)
+        if f > max_f:
+            max_f = f
+            max_g = genome
+
         genome.fitness = f
         fs.append(f)
         sum += f
@@ -59,7 +65,7 @@ def run(gens):
     pop.add_reporter(neat.reporting.StdOutReporter(True))
 
     winner = pop.run(eval_fitness, gens)
-    print("es_hyperneat_xor_medium done")
+    # print("es_hyperneat_xor_medium done")
     return winner, stats
 
 
@@ -78,7 +84,7 @@ if __name__ == '__main__':
 
     for i in range(10):
         
-        experiment_name = 'hyper_enemy'+ str(enemy)+'randomini_test'+str(i)
+        experiment_name = 'hyper_enemy'+ str(enemy)+'multi'+str(i)
         if not os.path.exists(experiment_name):
             os.makedirs(experiment_name)
         env = Environment(experiment_name=experiment_name,
@@ -89,7 +95,10 @@ if __name__ == '__main__':
                         level=2,
                         speed="fastest",
                         randomini="yes" )
-
+        global max_f 
+        max_f = -9999
+        global max_g 
+        max_g = None
         sub = Substrate(input_coordinates, output_coordinates)
 
         # ES-HyperNEAT specific parameters.
@@ -114,13 +123,17 @@ if __name__ == '__main__':
         print('\nOutput:')
         cppn = neat.nn.FeedForwardNetwork.create(winner, config)
         network = ESNetwork(sub, cppn, params)
-        winner_net = network.create_phenotype_network(filename='es_hyperneat_xor_medium_winner.png')  # This will also draw winner_net.
+        winner_net = network.create_phenotype_network(filename=experiment_name+'/es_hyperneat_xor_medium_winner.png')  # This will also draw winner_net.
         with open(experiment_name+'/winner_genome.pkl','wb')as f:
 
             pickle.dump(winner,f)
             f.close()
+        with open(experiment_name+'/my_winner_genome_'+str(int(max_f))+'.pkl','wb')as f:
+
+            pickle.dump(max_g,f)
+            f.close()
         # Save CPPN if wished reused and draw it to file.
-        draw_net(cppn, filename="es_hyperneat_xor_medium_cppn")
+        draw_net(cppn, filename=experiment_name+"/es_hyperneat_xor_medium_cppn")
         with open(experiment_name+'/es_hyperneat_xor_medium_cppn.pkl', 'wb') as output:
             pickle.dump(cppn, output, pickle.HIGHEST_PROTOCOL)
 

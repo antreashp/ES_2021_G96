@@ -113,7 +113,7 @@ def plot_species(statistics, view=False, filename='speciation.svg'):
     plt.close()
 
 
-def draw_net(config, genome, view=False, filename=None, node_names=None, show_disabled=True, prune_unused=False,
+def draw_net(config, genome, view=False, filename=None, node_names=None, show_disabled=False, prune_unused=False,
              node_colors=None, fmt='svg'):
     """ Receives a genome and draws a neural network with arbitrary topology. """
     # Attributes for network nodes.
@@ -134,10 +134,11 @@ def draw_net(config, genome, view=False, filename=None, node_names=None, show_di
     node_attrs = {
         'shape': 'circle',
         'fontsize': '9',
+        
         'height': '0.2',
         'width': '0.2'}
 
-    dot = graphviz.Digraph(format=fmt, node_attr=node_attrs)
+    dot = graphviz.Digraph(format=fmt, node_attr=node_attrs,graph_attr={ 'ranksep':'5.0','constrain':'True' })
 
     inputs = set()
     for k in config.genome_config.input_keys:
@@ -189,9 +190,9 @@ def draw_net(config, genome, view=False, filename=None, node_names=None, show_di
             b = node_names.get(output, str(output))
             style = 'solid' if cg.enabled else 'dotted'
             color = 'green' if cg.weight > 0 else 'red'
-            width = str(0.1 + abs(cg.weight / 5.0))
-            dot.edge(a, b, _attributes={'style': style, 'color': color, 'penwidth': width})
+            width =  '1'# str(0.1 + abs(cg.weight))
+            dot.edge(a, b, _attributes={'style': style, 'color': color, 'penwidth': width,'len':'1'})
 
-    dot.render(filename, view=view)
-
+    dot.render(filename, view=view,cleanup=True)
+    # draw('filename.png')
     return dot

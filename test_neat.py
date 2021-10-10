@@ -1,10 +1,11 @@
 import neat
 import os,sys
+import numpy as np
 import pickle
 import sys
 sys.path.insert(0, 'evoman')
 from environment import Environment
-
+import matplotlib.pyplot as plt
 from tqdm import tqdm
 from neat_feed_forward_controller import player_controller
 
@@ -17,13 +18,7 @@ enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6
 experiment_name = 'test_enemy'+ str(enemy)
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
-env = Environment(experiment_name=experiment_name,
-                  enemies=[int(enemy)],
-                  playermode="ai",
-                  player_controller=player_controller,
-                  enemymode="static",
-                  level=2,
-                  speed="normal")
+
 
 
 
@@ -34,30 +29,67 @@ config_path = os.path.join(local_dir, 'config-feedforward.txt')
 config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                      neat.DefaultSpeciesSet, neat.DefaultStagnation,
                      config_path)
-
-def test(genome):
-    print('hello')
+def make_box_plot(fitnesses):
+    # pass
+    # fitness = np.array(fitnesses[1])
+    # spread = np.random.rand(50) * 100
+    # print(spread.shape)
+    # print(fitness.shape)
+    # spread = fitness
+    # center = np.median(fitness)
+    # print(center)
+    # flier_high = np.max(fitness)
+    # flier_low = np.max(fitness)
+    # data = np.concatenate((fitnesses[1], fitnesses[2]))
+    fig1, ax1 = plt.subplots()
+    ax1.set_title('Basic Plot')
+    box_data = [fitnesses[2], fitnesses[5],fitnesses[8]]
+    plt.title("NEAT Winner Phenotype's Performance")
+    ax1.set_ylim(ymin=0,ymax=100)
+    plt.ylabel("Fitness")
+    ax1.boxplot(box_data,patch_artist=True,labels=['enemy 2','enemy 5','enemy 8'])
+    plt.show()
+def test(env,genome):
+    # print('hello')
 
     env.player_controller =player_controller(  neat.nn.FeedForwardNetwork.create(genome, config),write=True)
 
     f,p,e,t = env.play(pcont=genome)
     genome.fitness = f
+    print(f)
     return f
 
 if __name__ == '__main__':
     print('meh')
-    with open('enemy'+str(enemy)+'/winner_genome.pkl', 'rb') as f:
-        winner = pickle.load(f)
+    enemies = [2,5,8]
 
-    print('Loaded genome:')
+    fitnesses ={1:[],2:[],3:[],4:[],5:[],7:[],8:[]}
     
+    for enemy in enemies:
+        if enemy == 4 or enemy ==5:
+            with open('neat_enemy_again'+str(enemy)+'/my_winner_genome_92.pkl', 'rb') as f:
+                winner = pickle.load(f)
+        if enemy == 2:
+            with open('neat_enemy_again'+str(enemy)+'/my_winner_genome_92.pkl', 'rb') as f:
+                    winner = pickle.load(f)
+        if enemy == 8:
+            with open('neat_enemy_again'+str(enemy)+'/my_winner_genome_87.pkl', 'rb') as f:
+                    winner = pickle.load(f)
+        
+        print('Loaded genome:')
+        env = Environment(experiment_name=experiment_name,
+                  enemies=[int(enemy)],
+                  playermode="ai",
+                  player_controller=player_controller,
+                  enemymode="static",
+                  level=2,
+                  speed="fastest",
+                  randomini='yes')    
+        
+        for i in range(2):
+            fitnesses[enemy].append( test(env,winner))
     
 
-    fitnesses =[]
-    for i in range(10):
-        fitnesses.append( test(winner))
-    
-
-    
+    make_box_plot(fitnesses)
 
 

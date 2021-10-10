@@ -22,6 +22,8 @@ def eval_genomes(genomes, config):
     max = -9999999
     c = 0
     fs  = []
+    global max_f
+    global max_g
     for genome_id, genome in tqdm(genomes):
         # genome.fitness = 4.0
         # print(f,p,e,t)
@@ -34,7 +36,9 @@ def eval_genomes(genomes, config):
         sum += f
         if f>max:
             max = f
-
+        if f > max_f:
+            max_f = f
+            max_g = genome
     mean = np.sum(fs)  / c
     std = statistics.stdev(fs)
     with open(experiment_name+'/'+'my_log.txt','a') as f:
@@ -86,11 +90,11 @@ if __name__ == '__main__':
     # Determine path to configuration file. This path manipulation is
     # here so that the script will run successfully regardless of the
     # current working directory.
-    enemy = str(sys.argv[1]) if len(sys.argv)> 1 else 6 
+    enemy = str(sys.argv[1]) 
         
     for i in range(10):
             
-        experiment_name = 'enemy'+ str(enemy)+'randomini_test_'+str(i)
+        experiment_name ='neat_enemy'+ str(enemy)+'multi'+str(i)
         headless = True
         if headless:
             os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -107,7 +111,10 @@ if __name__ == '__main__':
                         speed="fastest",
                         randomini="yes" )
 
-
+        global max_f 
+        max_f = -9999
+        global max_g 
+        max_g = None
         if  os.path.exists(experiment_name+'/'+'my_log.txt'):
             os.remove(experiment_name+'/'+'my_log.txt')
         local_dir = os.path.dirname(__file__)
